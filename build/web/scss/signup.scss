@@ -1,0 +1,25 @@
+.signup {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    
+    &-left {
+        position: relative;
+        background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fekare.com%2FUploads%2FUrunResimleri%2Fbuyuk%2Fyuksek-cozunurluklu-ataturk-posteri-c914.jpg&f=1&nofb=1') center center no-repeat;
+        background-size: contain;
+        
+        .logo.top-left {
+            position: absolute;
+            top: 30px;
+            left: 30px
+        }
+    }
+
+    &-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #7C68FA;
+    }
+}

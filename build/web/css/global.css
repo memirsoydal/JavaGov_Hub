@@ -1,13 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif; }
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  color: #1B1919; }
 
 .container {
   width: 1440px;
   margin: 0 auto; }
-  .container form {
-    background-color: red; }
+
+.logo {
+  background: url("../img/logo.png");
+  width: 108px;
+  height: 42px; }
+
+.w-50 {
+  width: 50% !important; }
+
+a {
+  color: #456EFF;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+input[type="submit"] {
+  min-width: 120px;
+  padding: 12px;
+  cursor: pointer; }
+  input[type="submit"].primary {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C68FA;
+    transition: 0.2s ease; }
+    input[type="submit"].primary:hover {
+      background-color: #7C68FACC; }
+
+input:not([type="submit"]) {
+  padding: 15px;
+  border: 1px solid #1B1919;
+  border-radius: 8px;
+  background: white; }
+
+form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px; }
+  form .form-group label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px; }
+form .form-error {
+  color: #E43F3F;
+  margin-top: 69px; }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 600px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.25); }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 21px;
+    border-bottom: 1px solid #1B1919; }
+    .modal-header-title {
+      font-size: 2rem; }
+  .modal-body {
+    padding: 70px 34px 0 34px; }
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 49px 0; }
+
+.d-flex {
+  display: flex !important; }
+
+.aic {
+  align-items: center !important; }
+
+.jcc {
+  justify-content: center !important; }
+
+.jcsb {
+  justify-content: space-between !important; }
 
 /*# sourceMappingURL=global.css.map */

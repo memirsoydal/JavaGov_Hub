@@ -44,9 +44,9 @@ public class Signup {
         
         if (this.errorText.length() != 0) {
             // do not redirect
-            return "/Signup/signup.xhtml?faces-redirect=true";
+            return "/signup.xhtml?faces-redirect=true";
         }
         
-        return "/ResetPassword/resetPassword.xhtml?faces-redirect=true";
+        return "/resetPassword.xhtml?faces-redirect=true";
     }
 }

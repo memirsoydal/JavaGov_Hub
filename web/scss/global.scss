@@ -34,7 +34,18 @@ a {
     }
 }
 
-input[type="submit"] {
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    padding: 15px;
+    border: 1px solid #1B1919;
+    border-radius: 8px;
+    background: white;
+}
+
+input[type="submit"],
+input[type="button"],
+button {
     min-width: 120px;
     padding: 12px;
     cursor: pointer;
@@ -50,13 +61,6 @@ input[type="submit"] {
             background-color: #7C68FACC;
         }
     }
-}
-
-input:not([type="submit"]) {
-    padding: 15px;
-    border: 1px solid #1B1919;
-    border-radius: 8px;
-    background: white;
 }
 
 form {

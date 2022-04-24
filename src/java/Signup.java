@@ -10,13 +10,43 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped 
 //@SessionScoped
 public class Signup {
-    private String text = "abc";
+    // variables
+    String password, tcNo;
+    String errorText = "";
     
-    public void setText(String text) {
-        this.text = text;
+    // getters and setters
+    public void setErrorText(String error) { 
+        this.errorText = error;
     }
     
-    public String getText() {
-        return this.text;
+    public String getErrorText() {
+        return this.errorText;
+    }
+    
+    public void setPassword(String password) { 
+        this.password = password;
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public void setTcNo(String tcNo) { 
+        this.tcNo = tcNo;
+    }
+    
+    public String getTcNo() {
+        return this.tcNo;
+    }
+    
+    public String signup() {
+        System.out.println(this.errorText);
+        
+        if (this.errorText.length() != 0) {
+            // do not redirect
+            return "/Signup/signup.xhtml?faces-redirect=true";
+        }
+        
+        return "/ResetPassword/resetPassword.xhtml?faces-redirect=true";
     }
 }

@@ -57,17 +57,17 @@ public class ResetPassword {
     public String reset() {
         if (!this.password.equals(this.password2)) {
             this.errorText = "Girilen parolalar eşit değil.";
-            return "/ResetPassword/resetPassword.xhtml?faces-redirect=true";
+            return "/resetPassword.xhtml?faces-redirect=true";
         } else {
             this.errorText = "";
         }
         
         if (this.errorText.length() != 0) {
             // do not redirect
-            return "/ResetPassword/resetPassword.xhtml?faces-redirect=true";
+            return "/resetPassword.xhtml?faces-redirect=true";
         }
         
-        return "/Signup/signup.xhtml?faces-redirect=true";
+        return "/signup.xhtml?faces-redirect=true";
     }
     
     // special functions

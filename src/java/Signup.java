@@ -39,13 +39,7 @@ public class Signup {
         return this.tcNo;
     }
     
-    public void signup() {
-        // error cases
-        
-        this.errorText = "";
-    }
-    
-    public String redirect() {
+    public String signup() {
         System.out.println(this.errorText);
         
         if (this.errorText.length() != 0) {

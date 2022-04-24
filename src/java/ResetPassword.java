@@ -54,7 +54,7 @@ public class ResetPassword {
         return this.tcNo;
     }
     
-    public String redirect() {
+    public String reset() {
         if (!this.password.equals(this.password2)) {
             this.errorText = "Girilen parolalar eşit değil.";
             return "/ResetPassword/resetPassword.xhtml?faces-redirect=true";

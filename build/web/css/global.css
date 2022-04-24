@@ -25,24 +25,32 @@ a {
   a:hover {
     text-decoration: underline; }
 
-input[type="submit"] {
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  padding: 15px;
+  border: 1px solid #1B1919;
+  border-radius: 8px;
+  background: white; }
+
+input[type="submit"],
+input[type="button"],
+button {
   min-width: 120px;
   padding: 12px;
   cursor: pointer; }
-  input[type="submit"].primary {
+  input[type="submit"].primary,
+  input[type="button"].primary,
+  button.primary {
     color: white;
     border: none;
     border-radius: 8px;
     background-color: #7C68FA;
     transition: 0.2s ease; }
-    input[type="submit"].primary:hover {
+    input[type="submit"].primary:hover,
+    input[type="button"].primary:hover,
+    button.primary:hover {
       background-color: #7C68FACC; }
-
-input:not([type="submit"]) {
-  padding: 15px;
-  border: 1px solid #1B1919;
-  border-radius: 8px;
-  background: white; }
 
 form .form-group {
   display: flex;

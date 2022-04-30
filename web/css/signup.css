@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #7C68FA; }
+    background-color: #7C68FA;
+    border-radius: 24px 0 0 24px; }
 
 /*# sourceMappingURL=signup.css.map */

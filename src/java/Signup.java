@@ -2,6 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import db.Database;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
@@ -39,8 +42,12 @@ public class Signup {
         return this.tcNo;
     }
     
-    public String signup() {
-        System.out.println(this.errorText);
+    public String signup() throws SQLException {
+        boolean user = Database.loginUser(this.tcNo, this.password);
+        
+        if (!user) {
+            this.errorText = "Girilen bilgilerde bir kullanıcı bulunamadı";
+        }
         
         if (this.errorText.length() != 0) {
             // do not redirect

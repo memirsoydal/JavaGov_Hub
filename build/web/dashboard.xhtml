@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/dashboard.css" />
         <div class="topnav">
             <div class="container">
-                <h:button class="logo-dash"/>
+                <h:button class="logo-dash" outcome="#{dashboard.dashboard()}"/>
                 <h:form>
                     <h:inputText class="searchbar" value="#{dashboard.searchText}"/>
                 </h:form>
@@ -25,27 +25,27 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <div class="container">
-            <div class="outer-board">
+            <div class="outer-board" style="margin: 50px">
                 <div class="grid-container">
                     <div class="grid-item outer-card" style="background-color: blue">
-                        <h:button class="card" value="Sosyal Güvenlik Kurumu"/>
+                        <h:button class="card" value="Sosyal Güvenlik Kurumu" outcome="#{dashboard.b1()}"/>
                     </div>
-                    <div class="grid-item outer-card" style="background-color: yellow">
-                        <h:button class="card" value="Tapu ve Kadastro Genel Müdürlüğü"/>
+                    <div class="grid-item outer-card" style="background-color: blue">
+                        <h:button class="card" value="Tapu ve Kadastro Genel Müdürlüğü" outcome="#{dashboard.b2()}"/>
                     </div>
-                    <div class="grid-item outer-card" style="background-color: orange">
-                        <h:button class="card" value="Gelir İdaresi Başkanlığı"/>
+                    <div class="grid-item outer-card" style="background-color: blue">
+                        <h:button class="card" value="Gelir İdaresi Başkanlığı" outcome="#{dashboard.b3()}"/>
                     </div>
                 </div>
                 <div class="grid-container">
-                    <div class="grid-item outer-card" style="background-color: red">
-                        <h:button class="card" value="Sosyal Güvenlik Kurumu"/>
+                    <div class="grid-item outer-card" style="background-color: blue">
+                        <h:button class="card" value="Sosyal Güvenlik Kurumu" outcome="#{dashboard.b4()}"/>
                     </div>
-                    <div class="grid-item outer-card" style="background-color: purple">
-                        <h:button class="card" value="Aile ve Sosyal Hizmetler Bakanlığı"/>
+                    <div class="grid-item outer-card" style="background-color: blue">
+                        <h:button class="card" value="Aile ve Sosyal Hizmetler Bakanlığı" outcome="#{dashboard.b5()}"/>
                     </div>
-                    <div class="grid-item outer-card" style="background-color: magenta">
-                        <h:button class="card" value="Emniyet Genel Müdürlüğü"/>
+                    <div class="grid-item outer-card" style="background-color: blue">
+                        <h:button class="card" value="Emniyet Genel Müdürlüğü" outcome="#{dashboard.b6()}"/>
                     </div>
                 </div>
             </div>

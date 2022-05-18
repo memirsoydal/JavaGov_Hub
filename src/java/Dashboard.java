@@ -32,30 +32,30 @@ public class Dashboard {
     }
     
     public String b1() {
-        return "/sayfa1.xhtml";
+        return "./sayfa1.xhtml";
     }
     
     public String b2() {
-        return "/sayfa2.xhtml";
+        return "./sayfa2.xhtml";
     }
     
     public String b3() {
-        return "/sayfa3.xhtml";
+        return "./sayfa3.xhtml";
     }
     
     public String b4() {
-        return "/sayfa4.xhtml";
+        return "./sayfa4.xhtml";
     }
     
     public String b5() {
-        return "/sayfa5.xhtml";
+        return "./sayfa5.xhtml";
     }
     
     public String b6() {
-        return "/sayfa6.xhtml";
+        return "./sayfa6.xhtml";
     }
     
     public String dashboard() {
-        return "/dashboard.xhtml";
+        return "./dashboard.xhtml";
     }
 }

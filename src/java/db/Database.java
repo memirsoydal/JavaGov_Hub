@@ -82,4 +82,42 @@ public class Database {
             connection.close(); // return this connection to pool
         } // end finally
     }
+    public static ResultSet applyForm(String TcNo) throws SQLException {
+                // check whether dataSource was injected by the server
+        Context ctx = null;
+        DataSource dataSource = null;
+        
+        try {
+            ctx = new InitialContext();
+            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+        } catch (NamingException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ( dataSource == null )
+            throw new SQLException( "Unable to obtain DataSource" );
+
+        Connection connection = dataSource.getConnection();
+        CachedRowSet rowSet = null;
+        PreparedStatement ps;
+
+        // check whether connection was successful
+        if ( connection == null )
+            throw new SQLException( "Unable to connect to DataSource" );
+        else System.out.println("connected to db");
+        try {
+            ps = connection.prepareStatement( "select KIMLIK.tc_no, name, surname, address " +
+               " from KIMLIK, IKAMETGAH " + 
+               " where tc_no=?");
+            
+            ps.setString(1, TcNo);
+            
+            rowSet = new com.sun.rowset.CachedRowSetImpl();
+            rowSet.populate( ps.executeQuery() );
+            return rowSet;
+            
+        } finally {
+            connection.close(); // return this connection to pool
+        } // end finally
+    }
 }

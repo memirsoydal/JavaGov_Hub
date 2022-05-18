@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 
 @ManagedBean (name="user")
-@RequestScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
+@SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 //@SessionScoped
 public class Database {
     // TODO :: find a better way to not connect to the db in every function call 

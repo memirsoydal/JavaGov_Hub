@@ -24,250 +24,399 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 
-@ManagedBean (name="user")
+@ManagedBean(name = "user")
 @RequestScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 //@SessionScoped
 public class Database {
     // TODO :: find a better way to not connect to the db in every function call 
-   
+
     public static boolean loginUser(String tcNo, String password) throws SQLException {
         // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
-            
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
+
         try {
             System.out.println(tcNo);
             System.out.println(password);
 //            System.out.println(connection);
-            
-            ps = connection.prepareStatement( "select tc_no, name " +
-               " from USER_SIGNUP " + 
-               " where tc_no=? and password=?");
-            
+
+            ps = connection.prepareStatement("select tc_no, name "
+                    + " from USER_SIGNUP "
+                    + " where tc_no=? and password=?");
+
             ps.setString(1, tcNo);
             ps.setString(2, password);
-            
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
-            
+            rowSet.populate(ps.executeQuery());
+
             String name = "";
-            
+
             while (rowSet.next()) {
-                
+
                 name = rowSet.getString("name");
             }
-            
+
             return (name.length() > 0 ? true : false);
-            
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
     }
-    public static ResultSet applyForm(String TcNo) throws SQLException {
-                // check whether dataSource was injected by the server
+
+    public static ResultSet applyForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
         try {
-            ps = connection.prepareStatement( "select KIMLIK.tc_no, address, dogumYeri, dogumTarihi" +
-               " from KIMLIK, IKAMETGAH " + 
-               " where tc_no=?");
-            
-            ps.setString(1, TcNo);
-            
+            ps = connection.prepareStatement("select VATANDAS.ID, cinsiyet, address, dogum_yeri, dogum_tarihi"
+                    + " from VATANDAS, IKAMETGAH "
+                    + " where ID=?");
+
+            ps.setInt(1, ID);
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
+            rowSet.populate(ps.executeQuery());
             return rowSet;
-            
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
     }
-    public static ResultSet askerlikForm(String TcNo) throws SQLException {
-                // check whether dataSource was injected by the server
+
+    public static ResultSet askerlikForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
         try {
-            ps = connection.prepareStatement( "select KIMLIK.tc_no, askerlik, askerlikTarih" +
-               " from KIMLIK, ASKERLIK " + 
-               " where tc_no=?");
-            
-            ps.setString(1, TcNo);
-            
+            ps = connection.prepareStatement("select VATANDAS.ID, ASKERLIK_YAPTI, ASKER_KACAGI"
+                    + " from VATANDAS, ASKERLIK "
+                    + " where id=?");
+
+            ps.setInt(1, ID);
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
+            rowSet.populate(ps.executeQuery());
             return rowSet;
-            
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
     }
-        public static ResultSet cezaForm(String TcNo) throws SQLException {
-                // check whether dataSource was injected by the server
+
+    public static ResultSet cezaForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
         try {
-            ps = connection.prepareStatement( "select KIMLIK.tc_no, cezaSebep, cezaMiktar, cezaTarih" +
-               " from KIMLIK, CEZA " + 
-               " where tc_no=?");
-            
-            ps.setString(1, TcNo);
-            
+            ps = connection.prepareStatement("select VATANDAS.ID, ceza_sebep, ceza_miktar, ceza_alinan_tarih"
+                    + " from VATANDAS, CEZA "
+                    + " where id=?");
+
+            ps.setInt(1, ID);
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
+            rowSet.populate(ps.executeQuery());
             return rowSet;
-            
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
     }
-        public static ResultSet sigortaForm(String TcNo) throws SQLException {
-                // check whether dataSource was injected by the server
+
+    public static ResultSet sigortaForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
         try {
-            ps = connection.prepareStatement( "select KIMLIK.tc_no, emekli, calisiyor, emekliyasisure, sigortasure " +
-               " from KIMLIK, SIGORTA " + 
-               " where tc_no=?");
-            
-            ps.setString(1, TcNo);
-            
+            ps = connection.prepareStatement("select VATANDAS.ID, emekli, calisiyor, emeklilik_baslangici "
+                    + " from VATANDAS, SIGORTA "
+                    + " where id=?");
+
+            ps.setInt(1, ID);
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
+            rowSet.populate(ps.executeQuery());
             return rowSet;
-            
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
     }
-        public static ResultSet ikametgahForm(String TcNo) throws SQLException {
-                // check whether dataSource was injected by the server
+
+    public static ResultSet ikametgahForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
         Context ctx = null;
         DataSource dataSource = null;
-        
+
         try {
             ctx = new InitialContext();
-            dataSource = (DataSource)ctx.lookup("jdbc/sample");
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
         } catch (NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if ( dataSource == null )
-            throw new SQLException( "Unable to obtain DataSource" );
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
 
         Connection connection = dataSource.getConnection();
         CachedRowSet rowSet = null;
         PreparedStatement ps;
 
         // check whether connection was successful
-        if ( connection == null )
-            throw new SQLException( "Unable to connect to DataSource" );
-        else System.out.println("connected to db");
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
         try {
-            ps = connection.prepareStatement( "select KIMLIK.tc_no, tapuluMal, ikametgahKisi, ikametgahTarih, ikametgahm2" +
-               " from KIMLIK, IKAMETGAH " + 
-               " where tc_no=?");
-            
-            ps.setString(1, TcNo);
-            
+            ps = connection.prepareStatement("select VATANDAS.ID, adres, kisi_sayisi, tarih, metrekare"
+                    + " from VATANDAS, IKAMETGAH "
+                    + " where id=?");
+
+            ps.setInt(1, ID);
+
             rowSet = new com.sun.rowset.CachedRowSetImpl();
-            rowSet.populate( ps.executeQuery() );
+            rowSet.populate(ps.executeQuery());
             return rowSet;
-            
+
+        } finally {
+            connection.close(); // return this connection to pool
+        } // end finally
+    }
+
+    public static ResultSet basvuruForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
+        Context ctx = null;
+        DataSource dataSource = null;
+
+        try {
+            ctx = new InitialContext();
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
+        } catch (NamingException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
+
+        Connection connection = dataSource.getConnection();
+        CachedRowSet rowSet = null;
+        PreparedStatement ps;
+
+        // check whether connection was successful
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
+        try {
+            ps = connection.prepareStatement("select BASVURULAR.ID, KURUM_ID, BASVURU_DURUMU, BASVURU_TARIHI"
+                    + " from BASVURULAR "
+                    + " where id=?");
+
+            ps.setInt(1, ID);
+
+            rowSet = new com.sun.rowset.CachedRowSetImpl();
+            rowSet.populate(ps.executeQuery());
+            return rowSet;
+
+        } finally {
+            connection.close(); // return this connection to pool
+        } // end finally
+    }
+        public static ResultSet kurumForm(int ID) throws SQLException {
+        // check whether dataSource was injected by the server
+        Context ctx = null;
+        DataSource dataSource = null;
+
+        try {
+            ctx = new InitialContext();
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
+        } catch (NamingException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
+
+        Connection connection = dataSource.getConnection();
+        CachedRowSet rowSet = null;
+        PreparedStatement ps;
+
+        // check whether connection was successful
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
+        try {
+            ps = connection.prepareStatement("select ID, KURUM_ADI, KURULUS_YILI "
+                    + " from YARDIM_KURUMLARI "
+                    + " where ID=?");
+
+            ps.setInt(1, ID);
+
+            rowSet = new com.sun.rowset.CachedRowSetImpl();
+            rowSet.populate(ps.executeQuery());
+            return rowSet;
+
+        } finally {
+            connection.close(); // return this connection to pool
+        } // end finally
+    }
+    public static ResultSet addBasvuru(int ID, int KURUM_ID, boolean BASVURU_DURUMU, String BASVURU_TARIHI) throws SQLException {
+        // check whether dataSource was injected by the server
+        Context ctx = null;
+        DataSource dataSource = null;
+
+        try {
+            ctx = new InitialContext();
+            dataSource = (DataSource) ctx.lookup("jdbc/sample");
+        } catch (NamingException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (dataSource == null) {
+            throw new SQLException("Unable to obtain DataSource");
+        }
+
+        Connection connection = dataSource.getConnection();
+        CachedRowSet rowSet = null;
+        PreparedStatement ps;
+
+        // check whether connection was successful
+        if (connection == null) {
+            throw new SQLException("Unable to connect to DataSource");
+        } else {
+            System.out.println("connected to db");
+        }
+        try {
+            ps = connection.prepareStatement("INSERT INTO BASVURULAR (ID, KURUM_ID, BASVURU_DURUMU, BASVURU_TARIHI)" 
+                    + " VALUES(?,?,?,?)");
+
+            ps.setInt(1, ID);
+            ps.setInt(2, KURUM_ID);
+            ps.setBoolean(3, BASVURU_DURUMU);
+            ps.setString(4, BASVURU_TARIHI);
+
+            rowSet = new com.sun.rowset.CachedRowSetImpl();
+            rowSet.populate(ps.executeQuery());
+            return rowSet;
+
         } finally {
             connection.close(); // return this connection to pool
         } // end finally

@@ -56,6 +56,6 @@ public class Dashboard {
     }
     
     public String dashboard() {
-        return "./dashboard.xhtml";
+        return "/dashboard.xhtml";
     }
 }

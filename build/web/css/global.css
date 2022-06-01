@@ -28,7 +28,8 @@ a {
 
 input[type="text"],
 input[type="password"],
-input[type="number"] {
+input[type="number"],
+textarea {
   padding: 15px;
   border: 1px solid #1B1919;
   border-radius: 8px;
@@ -37,6 +38,8 @@ input[type="number"] {
 input[type="submit"],
 input[type="button"],
 button {
+  display: flex;
+  align-items: center;
   min-width: 120px;
   padding: 12px;
   cursor: pointer; }
@@ -48,6 +51,11 @@ button {
     border-radius: 8px;
     background-color: #7C68FA;
     transition: 0.2s ease; }
+    input[type="submit"].primary *,
+    input[type="button"].primary *,
+    button.primary * {
+      color: white;
+      fill: white; }
     input[type="submit"].primary:hover,
     input[type="button"].primary:hover,
     button.primary:hover {

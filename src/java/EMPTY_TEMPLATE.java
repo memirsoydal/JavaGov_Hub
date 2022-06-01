@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean (name="your_class_name")
-@SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
+@ApplicationScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 //@SessionScoped
 public class EMPTY_TEMPLATE {
     // variables

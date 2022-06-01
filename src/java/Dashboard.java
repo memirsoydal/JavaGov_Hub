@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.SQLException;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean (name="dashboard")
-@RequestScoped 
+@ApplicationScoped 
 //@SessionScoped
 public class Dashboard {
     // variables
@@ -31,12 +33,12 @@ public class Dashboard {
         return this.name;
     }
     
-    public String b1() {
-        return "./sayfa1.xhtml";
+    public String b1() throws SQLException {
+        return "./sayfa1.xhtml?faces-redirect=true";
     }
     
     public String b2() {
-        return "./sayfa2.xhtml";
+        return "./sayfa2.xhtml?faces-redirect=true";
     }
     
     public String b3() {

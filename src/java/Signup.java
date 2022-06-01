@@ -54,6 +54,6 @@ public class Signup {
             return "/signup.xhtml?faces-redirect=true";
         }
         
-        return "/resetPassword.xhtml?faces-redirect=true";
+        return "/dashboard.xhtml?faces-redirect=true";
     }
 }

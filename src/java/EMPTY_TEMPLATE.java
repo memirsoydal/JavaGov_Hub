@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean (name="your_class_name")
-@RequestScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
+@SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 //@SessionScoped
 public class EMPTY_TEMPLATE {
     // variables

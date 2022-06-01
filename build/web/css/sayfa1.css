@@ -1,0 +1,17 @@
+.service {
+  margin-top: 16px; }
+  .service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #373737;
+    /*border-bottom: 1px solid #7C68FA;*/ }
+    .service-header-right .star-icon {
+      margin-right: 16px; }
+    .service-header-right .print svg {
+      margin-left: 8px; }
+  .service-body {
+    padding: 16px 0; }
+
+/*# sourceMappingURL=sayfa1.css.map */

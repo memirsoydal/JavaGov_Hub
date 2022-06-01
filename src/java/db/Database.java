@@ -25,8 +25,8 @@ import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 
 @ManagedBean(name = "user")
-@RequestScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
-//@SessionScoped
+@SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
+
 public class Database {
     // TODO :: find a better way to not connect to the db in every function call 
 
@@ -60,27 +60,34 @@ public class Database {
         try {
             System.out.println(tcNo);
             System.out.println(password);
-//            System.out.println(connection);
 
-            ps = connection.prepareStatement("select tc_no, name "
-                    + " from USER_SIGNUP "
-                    + " where tc_no=? and password=?");
+            ps = connection.prepareStatement("select id, name "
+                    + " from GENEL "
+                    + " where id=? and password=?");
 
-            ps.setString(1, tcNo);
+            ps.setInt(1, Integer.parseInt(tcNo));
             ps.setString(2, password);
 
             rowSet = new com.sun.rowset.CachedRowSetImpl();
             rowSet.populate(ps.executeQuery());
 
             String name = "";
-
+            int id = 0;
+            
             while (rowSet.next()) {
-
                 name = rowSet.getString("name");
+                id = rowSet.getInt("id");
+            }
+            
+            if (name.length() > 0) {
+                user.User.id = id;
+                user.User.name = name;
+                System.out.println("name burasi: " + name);
+                
+                return true;
             }
 
-            return (name.length() > 0 ? true : false);
-
+            return false;
         } finally {
             connection.close(); // return this connection to pool
         } // end finally
@@ -113,11 +120,11 @@ public class Database {
             System.out.println("connected to db");
         }
         try {
-            ps = connection.prepareStatement("select VATANDAS.ID, cinsiyet, address, dogum_yeri, dogum_tarihi"
+            ps = connection.prepareStatement("select VATANDAS.ID, cinsiyet, adres, dogum_yeri, dogum_tarihi"
                     + " from VATANDAS, IKAMETGAH "
-                    + " where ID=?");
+                    + " where VATANDAS.ID=1235882");
 
-            ps.setInt(1, ID);
+//            ps.setInt(0, ID);
 
             rowSet = new com.sun.rowset.CachedRowSetImpl();
             rowSet.populate(ps.executeQuery());

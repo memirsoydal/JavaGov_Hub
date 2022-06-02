@@ -32,27 +32,23 @@ public class Dashboard {
     }
     
     public String b1() {
-        return "./sayfa1.xhtml";
+        return "./kimlik.xhtml";
     }
     
     public String b2() {
-        return "./sayfa2.xhtml";
+        return "./tapu.xhtml";
     }
     
     public String b3() {
-        return "./sayfa3.xhtml";
+        return "./ceza.xhtml";
     }
     
     public String b4() {
-        return "./sayfa4.xhtml";
+        return "./emeklilik.xhtml";
     }
     
     public String b5() {
-        return "./sayfa5.xhtml";
-    }
-    
-    public String b6() {
-        return "./sayfa6.xhtml";
+        return "./basvuru.xhtml";
     }
     
     public String dashboard() {

@@ -152,7 +152,8 @@ public class Services {
     }
     public void getBasvuruValues() throws SQLException{
         ResultSet myVariable = Database.basvuruForm(user.User.id);
-        while (myVariable.next()) {
+        while (myVariable.next()) 
+        {
             this.KURUM_ID = myVariable.getInt("KURUM_ID");
             this.BASVURU_DURUMU = myVariable.getString("BASVURU_DURUMU");
             this.BASVURU_TARIHI = myVariable.getString("BASVURU_TARIHI");

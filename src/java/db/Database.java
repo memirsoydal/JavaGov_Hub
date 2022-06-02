@@ -24,7 +24,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 
-@ManagedBean(name = "user")
+@ManagedBean(name = "jhkjhk")
 @SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 
 public class Database {

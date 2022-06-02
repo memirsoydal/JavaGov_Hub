@@ -2,24 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import db.Database;
+import java.sql.SQLException;
 import user.User;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
-
-import user.User;
 
 @ManagedBean (name="reset_password")
 @ApplicationScoped 
 public class ResetPassword {
     // variables
     String password, password2, tcNo;
-    String errorText = "Girilen T.C. Kimlik Numarasına sahip bir vatandaş bulunamadı";
-    
-    public ResetPassword() {
-        System.out.println("test, inside reset pass");
-        System.out.println("inside constructor password: " + password);
-        System.out.println("inside constructor password2: " + password2);
-    }
+    String errorText = ".";
     
     // getters and setters
     public void setErrorText(String error) { 
@@ -54,9 +48,16 @@ public class ResetPassword {
         return this.tcNo;
     }
     
-    public String reset() {
-        if (!this.password.equals(this.password2)) {
-            this.errorText = "Girilen parolalar eşit değil.";
+    public String reset() throws SQLException {
+        System.out.println(this.password + "  " + this.password2);
+        if (this.password.equals(this.password2)) {
+            this.errorText = "Yeni bir parola giriniz.";
+            return "/resetPassword.xhtml?faces-redirect=true";
+        } else if (this.password2.length() < 5) { 
+            this.errorText = "Girilen parola çok kısa.";
+            return "/resetPassword.xhtml?faces-redirect=true";
+        } else if (!Database.resetPassword(tcNo, password, password2)) {
+            this.errorText = "Girdiğiniz şifre yanlış.";
             return "/resetPassword.xhtml?faces-redirect=true";
         } else {
             this.errorText = "";
@@ -66,7 +67,6 @@ public class ResetPassword {
             // do not redirect
             return "/resetPassword.xhtml?faces-redirect=true";
         }
-        
         return "/signup.xhtml?faces-redirect=true";
     }
     

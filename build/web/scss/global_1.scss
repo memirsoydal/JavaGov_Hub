@@ -9,6 +9,15 @@
     color: #1B1919;
 }
 
+html {
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 h1 {
     font-size: 1.5rem;
 }
@@ -20,10 +29,6 @@ h2 {
 svg {
     width: 20px;
     height: 20px;
-}
-
-object {
-    width: 100%;
 }
 
 .nav {
@@ -93,7 +98,8 @@ object {
 }
 
 .container {
-    width: 95%;
+    flex-grow: 1;
+    width: 95%;    
     max-width: 1440px;
     margin: 0 auto;
 }

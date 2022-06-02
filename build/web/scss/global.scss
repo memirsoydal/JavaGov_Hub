@@ -9,8 +9,97 @@
     color: #1B1919;
 }
 
+html {
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+}
+
+.nav {
+    width: 100%;
+    height: 98px;
+    background-color: #7C68FA;
+    
+    .logo-dash {
+        background-color: white;
+        background: white url("../img/logo.png") center center;
+        background-repeat: no-repeat;
+        border-radius: 9px;
+        height: 50px;
+        padding: 4px 10px !important;
+        border: 1px solid;
+    }
+
+    &-inner {
+        padding: 24px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .searchbar {
+            position: relative;
+            min-width: 70%;
+            
+            .search-icon {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                pointer-events: none;
+            }
+            
+            input[type="text"] {
+                width: 100%;
+            }
+            
+            .search-button {
+                position: absolute;
+                width: 52px;
+                height: calc(100% - 2px);
+                top: 1px;
+                right: 1px;
+                min-width: auto;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                transition: 0.3s ease;
+                
+                &:hover {
+                    background: #e7e7e7;
+                }
+            }
+        }
+        
+        .input[type=text] {
+          float: right;
+          padding: 6px;
+          border: none;
+          margin-top: 8px;
+          margin-right: 16px;
+          font-size: 17px;
+        }
+    }
+}
+
 .container {
-    width: 95%;
+    flex-grow: 1;
+    width: 95%;    
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -35,6 +124,58 @@ a {
     }
 }
 
+.card {
+    position: relative;
+    width: 100%;
+    min-height: 97px;
+    border-radius: 12px;
+    background: #FDFDFD;
+    padding: 20px;
+    padding-left: 32px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    
+    &.info {
+        transform: unset !important;
+        
+        .card-badge {
+            background-color: #6CA2F2
+        }
+    }
+    
+    &:hover {
+        transform: scale(1.01);
+    }
+    
+    &-badge {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 12px;
+        height: 100%;
+        background: #7C68FA;
+    }
+    
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        a {
+            color: #000000;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+        }
+    }
+    
+    &-body {
+        margin-top: 8px;
+        color: #7B747D;
+    }
+}
+
 input[type="text"],
 input[type="password"],
 input[type="number"],
@@ -43,6 +184,21 @@ textarea {
     border: 1px solid #1B1919;
     border-radius: 8px;
     background: white;
+    
+    &:hover,
+    &:active,
+    &:focus {
+        outline: none;
+    }
+    
+    &.disabled {
+        background-color: #f7f7f7;
+        pointer-events: none;
+    }
+}
+
+textarea {
+    min-height: 100px;
 }
 
 input[type="submit"],
@@ -50,14 +206,16 @@ input[type="button"],
 button {
     display: flex;
     align-items: center;
+    justify-content: center;
     min-width: 120px;
     padding: 12px;
+    border-radius: 8px;
     cursor: pointer;
+
     
     &.primary {
         color: white;
         border: none;
-        border-radius: 8px;
         background-color: #7C68FA;
         transition: 0.2s ease;
         
@@ -140,3 +298,20 @@ form {
 .jcsb {
     justify-content: space-between !important;
 }
+
+.mt-2 {
+    margin-top: .5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 2rem;
+}
+

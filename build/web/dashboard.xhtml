@@ -33,12 +33,27 @@ and open the template in the editor.
         </nav>
         <div class="container">
             <div class="outer-board">
-                <!-- ataturk -->
+                <div class="d-flex aic">
+                    <h:outputLink class="card atam" value="https://www.atam.gov.tr">
+                        <div class="atam-header"></div>
+                        <div class="card-body">
+                            <h1 class="card-header">ATAM</h1>
+                            Atatürk Araştırma Merkezi Başkanlığı İnternet sitesini ziyaret edin.
+                        </div>
+                    </h:outputLink>
+                    <h:outputLink class="card fotokop" value="">
+                        <div class="fotokop-header"></div>
+                        <div class="card-body">
+                            <h1 class="card-header">Fotokopi Bakanlığı</h1>
+                            Kimlik fotokopinizi çekmek bu kadar kolay!
+                        </div>
+                    </h:outputLink>
+                </div>
                 <div class="popular-services">
                     <h1>Populer Hizmetler</h1>
                     <div class="grid-container">
                     <div class="card">
-                        <div class="card-badge" style="background-color: blue"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b1()}" >Sosyal Güvenlik Kurumu</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -50,7 +65,7 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-badge" style="background-color: #6CA2F2"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b2()}" >Tapu ve Kadastro Genel Müdürlüğü</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -58,11 +73,11 @@ and open the template in the editor.
                             </svg>
                         </div>
                         <div class="card-body">
-                            Tapu ve Kadastro Genel Müdürlüğü
+                            Tapu bilgileri sorgulama
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-badge" style="background-color: blue"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b3()}" >Gelir İdaresi Başkanlığı</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -70,11 +85,11 @@ and open the template in the editor.
                             </svg>
                         </div>
                         <div class="card-body">
-                            Gelir İdaresi Başkanlığı
+                            Vergi borcu sorgulama
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-badge" style="background-color: blue"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b3()}" >Sosyal Güvenlik Kurumu</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -82,11 +97,11 @@ and open the template in the editor.
                             </svg>
                         </div>
                         <div class="card-body">
-                            Gelir İdaresi Başkanlığı
+                            Ne zaman emekli olurum?
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-badge" style="background-color: blue"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b3()}" >Aile ve Sosyal Hizmetler Bakanlığı</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -94,11 +109,11 @@ and open the template in the editor.
                             </svg>
                         </div>
                         <div class="card-body">
-                            Gelir İdaresi Başkanlığı
+                            Sosyal yardım başvuru hizmetleri
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-badge" style="background-color: blue"></div>
+                        <div class="card-badge"></div>
                         <div class="card-header">
                             <h:outputLink value="#{dashboard.b3()}" >Emniyet Genel Müdürlüğü</h:outputLink>
                             <svg class="card-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
@@ -106,12 +121,11 @@ and open the template in the editor.
                             </svg>
                         </div>
                         <div class="card-body">
-                            Gelir İdaresi Başkanlığı
+                            Araç plakasına yapılan ceza sorgulama
                         </div>
                     </div>
                 </div>
                 </div>
-                
             </div>
         </div>
     </h:body>

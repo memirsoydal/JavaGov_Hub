@@ -24,11 +24,11 @@ public class User {
 
     // special functions
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
     
-    public static int getId() {
+    public int getId() {
         return id;
     }
     

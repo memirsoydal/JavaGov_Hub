@@ -94,18 +94,27 @@
     overflow: hidden;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     transition: 0.3s ease;
+    text-decoration: none !important;
     
     &:hover {
         transform: scale(1.01);
     }
-    
+    &:nth-child(3n) .card-badge {
+        background: #7C68FA;
+    }
+    &:nth-child(3n+1) .card-badge {
+        background: #FA7C68;
+    }
+    &:nth-child(3n+2) .card-badge {
+        background: #68FA7C;
+    }
     &-badge {
         position: absolute;
         left: 0;
         top: 0;
         width: 12px;
         height: 100%;
-        background: #7C68FA;
+        
     }
     
     &-header {
@@ -124,5 +133,72 @@
     &-body {
         margin-top: 8px;
         color: #7B747D;
+    }
+    
+    &.fotokop {
+        height: max-content;
+        padding: 0;
+        margin-left: 24px;
+        display: flex;
+        width: 650px;
+        height: 300px;
+        margin-bottom: 24px;
+        
+        .fotokop-header {
+            position: relative;
+            z-index: 3;
+            background: url(../img/fotokop.jpg) left no-repeat;
+            width: 100%;
+            height: 100%;
+            min-height: 140px;
+            background-size: 100%;
+        }
+        
+        .card-body {
+            position: absolute;
+            z-index: 4;
+            right: 0;
+            margin: 0;
+            max-width: 45%;
+            height: 100%;
+            padding-left: 12rem;
+            display: flex;
+            padding: 5px 20px 20px 65px;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(to left, white, rgba(255, 255, 255, 75%), rgba(255, 255, 255, 40%));
+            background: l;
+            ion-timing-function: linear;
+            on-timing-function: linear;
+            margin-top: 8px;
+            color: #7B747D;
+        }
+    }
+    
+    &.atam {
+        height: max-content;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        width: 296px;
+        height: 300px;
+        margin-bottom: 24px;
+        
+        .atam-header {
+            background: url(../img/atam.jpg) top no-repeat;
+            width: 100%;
+            height: 65%;
+            min-height: 140px;
+            background-size: 100%;
+        }
+        
+        .card-body {
+            margin: 0;
+            h1 {
+                margin-bottom: 8px;
+                font-weight: 500;
+            }
+            padding: 5px 20px 20px 20px;
+        }
     }
 }

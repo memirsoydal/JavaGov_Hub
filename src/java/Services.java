@@ -15,22 +15,19 @@ import javax.faces.bean.RequestScoped;
 @ApplicationScoped
 public class Services {
     // variables
-    int ID;
-    String Name,Surname,Gender,Address,DogumYeri,DogumTarihi;
-    boolean Askerlik,AskerlikKacagi;
+    int ID = user.User.id;
+    String Name,Surname,Gender,Address="",DogumYeri,DogumTarihi;
+    String Askerlik,AskerlikKacagi;
     String CezaSebep,CezaTarih;
     int CezaMiktar;
     String EmeklilikBaslangici;
-    boolean Emekli,Calisiyor;
+    String Emekli,Calisiyor;
     String tapuAdres,IkametgahTarih,IkametgahKisi,IkametgahMetrekare;
     int KURUM_ID;
-    boolean BASVURU_DURUMU;
+    String BASVURU_DURUMU;
     String BASVURU_TARIHI;
     String KURUM_ADI, KURULUS_YILI;
-    
-    public Services() throws SQLException {
-        this.getApplyValues();
-    }
+
     
     public int getID() {
         return this.ID;
@@ -48,10 +45,10 @@ public class Services {
     public String getAddress() {
         return this.Address;
     }
-    public boolean getAskerlik() {
+    public String getAskerlik() {
         return this.Askerlik;
     }
-    public boolean getAskerlikKacagi(){
+    public String getAskerlikKacagi(){
         return this.AskerlikKacagi;
     }
     public String getCezaSebep(){
@@ -66,13 +63,13 @@ public class Services {
     public String getEmeklilikBaslangici(){
         return this.EmeklilikBaslangici;
     }
-    public boolean getEmekli(){
+    public String getEmekli(){
         return this.Emekli;
     }
-    public boolean getCalisiyor(){
+    public String getCalisiyor(){
         return this.Calisiyor;
     }
-    public String getTapuluMal(){
+    public String getTapuluAdres(){
         return this.tapuAdres;
     }
     public String getIkametgahTarih(){
@@ -87,7 +84,7 @@ public class Services {
     public int getKurumID (){
         return this.KURUM_ID;
     }
-    public boolean getBasvuruDurumu (){
+    public String getBasvuruDurumu (){
         return this.BASVURU_DURUMU;
     }
     public String getBasvuruTarihi (){
@@ -99,9 +96,14 @@ public class Services {
     public String getKurulusYili(){
         return this.KURULUS_YILI;
     }
-    
+    public String getDogumYeri(){
+        return this.DogumYeri;
+    }
+    public String getDogumTarihi(){
+        return this.DogumTarihi;
+    }
     public void getApplyValues() throws SQLException{
-        ResultSet myVariable = Database.applyForm(this.ID);
+        ResultSet myVariable = Database.applyForm(user.User.id);
         while (myVariable.next()) {
             this.Gender = myVariable.getString("cinsiyet");
             this.Address = myVariable.getString("adres");
@@ -110,30 +112,37 @@ public class Services {
         }
     }    
     public void getAskerlikValues() throws SQLException{
-        ResultSet myVariable = Database.askerlikForm(this.ID);
+        ResultSet myVariable = Database.askerlikForm(user.User.id);
         while (myVariable.next()) {
-            this.Askerlik = myVariable.getBoolean("ASKERLIK_YAPTI");
-            this.AskerlikKacagi = myVariable.getBoolean("ASKER_KACAGI");
+            this.Askerlik = myVariable.getString("ASKERLIK_YAPTI");
+            this.AskerlikKacagi = myVariable.getString("ASKER_KACAGI");
         }
     }
     public void getCezaValues() throws SQLException{
-        ResultSet myVariable = Database.cezaForm(this.ID);
+        ResultSet myVariable = Database.cezaForm(user.User.id);
+        boolean cezaFound = false;
         while (myVariable.next()) {
+            cezaFound = true;
             this.CezaSebep = myVariable.getString("ceza_sebep");
             this.CezaMiktar = myVariable.getInt("ceza_miktar");
             this.CezaTarih = myVariable.getString("ceza_alinan_tarih");
         }
+        if (!cezaFound){
+            this.CezaSebep = "YOKTUR";
+            this.CezaMiktar = 0;
+            this.CezaTarih = "YOKTUR";   
+        }
     }
     public void getSigortaValues() throws SQLException{
-        ResultSet myVariable = Database.sigortaForm(this.ID);
+        ResultSet myVariable = Database.sigortaForm(user.User.id);
         while (myVariable.next()) {
-            this.Emekli = myVariable.getBoolean("emekli");
-            this.Calisiyor = myVariable.getBoolean("calisiyor");
+            this.Emekli = myVariable.getString("emekli");
+            this.Calisiyor = myVariable.getString("calisiyor");
             this.EmeklilikBaslangici = myVariable.getString("emeklilik_baslangici");
         }
     }
     public void getIkametgahValues() throws SQLException{
-        ResultSet myVariable = Database.ikametgahForm(this.ID);
+        ResultSet myVariable = Database.ikametgahForm(user.User.id);
         while (myVariable.next()) {
             this.tapuAdres = myVariable.getString("adres");
             this.IkametgahKisi = myVariable.getString("kisi_sayisi");
@@ -142,12 +151,14 @@ public class Services {
         }
     }
     public void getBasvuruValues() throws SQLException{
-        ResultSet myVariable = Database.basvuruForm(this.ID);
+        ResultSet myVariable = Database.basvuruForm(user.User.id);
         while (myVariable.next()) {
             this.KURUM_ID = myVariable.getInt("KURUM_ID");
-            this.BASVURU_DURUMU = myVariable.getBoolean("BASVURU_DURUMU");
+            this.BASVURU_DURUMU = myVariable.getString("BASVURU_DURUMU");
             this.BASVURU_TARIHI = myVariable.getString("BASVURU_TARIHI");
         }
+        getApplyValues();
+        getKurumValues();
     }
     public void getKurumValues() throws SQLException{
         ResultSet myVariable = Database.kurumForm(this.KURUM_ID);

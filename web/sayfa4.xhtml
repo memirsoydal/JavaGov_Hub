@@ -7,21 +7,82 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
  xmlns:h="http://java.sun.com/jsf/html"
- xmlns:f="http://java.sun.com/jsf/core">
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>E-devlet</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="../css/global.css" />
-        <link rel="stylesheet" href="../css/dashboard.css" />
-        <div class="topnav">
+        <link rel="stylesheet" href="../css/global_1.css" />
+        <link rel="stylesheet" href="../css/sayfa1.css" />
+        <nav class="nav">
             <div class="container">
-                <h:button class="logo-dash"/>
-                <h:form>
-                    <h:inputText class="searchbar" value="#{dashboard.searchText}"/>
-                </h:form>
-                <h:button class="profile" value="#{dashboard.name}"/>
+                <f:metadata>
+                    <f:event type="preRenderView" listener="#{services.getSigortaValues}" />
+                </f:metadata>
+                <div class="nav-inner">
+                    <h:button class="logo-dash" outcome="#{dashboard.dashboard()}" />
+                    <h:form class="searchbar">
+                        <f:passThroughAttribute name="autocomplete" value="off"/>
+                        <h:inputText a:placeholder="Arama yap..." value="#{search.searchText}" />
+                        <h:commandButton type="submit" class="search-button" action="/search.xhtml?faces-redirect=true" />
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 9.84871 15.3729 11.551 14.3199 12.9056L19.7071 18.2929L18.2929 19.7071L12.9056 14.3199C11.551 15.3729 9.84871 16 8 16ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8Z" fill="#333232"/>
+                        </svg>
+                    </h:form>
+                    <h:button class="profile" value="#{dashboard.name}" />
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="service">
+                <div class="service-header">
+                    <h1>Ne Zaman Emekli Olurum?</h1>
+                    <div class="d-flex aic jcsb service-header-right">
+                        <svg class="star-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73048 14.8942L5.32589 22.9182L12.6804 19.1298L20.035 22.9182L18.6304 14.8942L24.5804 9.21162L16.3577 8.04094L12.6804 0.740479L9.00317 8.04094L0.780518 9.21162L6.73048 14.8942ZM16.4371 14.196L17.324 19.2622L12.6804 16.8703L8.03692 19.2622L8.92375 14.196L5.16706 10.6081L10.3587 9.86895L12.6804 5.25958L15.0022 9.86895L20.1938 10.6081L16.4371 14.196Z" fill="#696969"/>
+                        </svg>
+                        <button class="primary print">
+                            <span>Print</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" >
+                                <g id="24 / basic / printer">
+                                <path id="icon" fill-rule="evenodd" clip-rule="evenodd" d="M4 7H6V2H18V7H20C21.1046 7 22 7.89543 22 9V17C22 18.1046 21.1046 19 20 19H18V22H6V19H4C2.89543 19 2 18.1046 2 17V9C2 7.89543 2.89543 7 4 7ZM16 7H8V4H16V7ZM20 9V17H18V15H6V17H4V9H20ZM16 17H8V20H16V17ZM19 11C19 10.4477 18.5523 10 18 10C17.4477 10 17 10.4477 17 11C17 11.5523 17.4477 12 18 12C18.5523 12 19 11.5523 19 11Z" fill="black"/>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="service-body">
+                    <h:form>
+                        <div class="form-group">
+                            <label>T.C. Kimlik Numarası</label>
+                            <h:inputText class="disabled" value="#{user.id}" />
+                        </div>
+                        <div class="form-group">
+                            <label>İsim</label>
+                            <h:inputText class="disabled" value="#{user.name}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Soyad</label>
+                            <h:inputText class="disabled" value="#{user.surname}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Emekli</label>
+                            <h:inputText class="disabled" value="#{services.emekli}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Calisiyor</label>
+                            <h:inputText class="disabled" value="#{services.calisiyor}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Emeklilik Suresi</label>
+                            <h:inputText class="disabled" value="#{services.emeklilikBaslangici}" />
+                        </div>
+                    </h:form>
+                </div>
+                
             </div>
         </div>
+        
     </h:head>
     <h:body>
     </h:body>

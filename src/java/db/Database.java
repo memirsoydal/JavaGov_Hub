@@ -23,11 +23,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
+import user.User;
 
-@ManagedBean(name = "user")
+@ManagedBean(name = "db")
 @SessionScoped // bean nesnesinin sadece bir request boyunca yaşaması anlamına gelir. Bir sonraki requestte bean sıfırlanır.
 
 public class Database {
+    
     // TODO :: find a better way to not connect to the db in every function call 
 
     public static boolean loginUser(String tcNo, String password) throws SQLException {
@@ -61,7 +63,7 @@ public class Database {
             System.out.println(tcNo);
             System.out.println(password);
 
-            ps = connection.prepareStatement("select id, name "
+            ps = connection.prepareStatement("select id, name, surname "
                     + " from GENEL "
                     + " where id=? and password=?");
 
@@ -71,17 +73,19 @@ public class Database {
             rowSet = new com.sun.rowset.CachedRowSetImpl();
             rowSet.populate(ps.executeQuery());
 
-            String name = "";
+            String name = "", surname="";
             int id = 0;
             
             while (rowSet.next()) {
                 name = rowSet.getString("name");
                 id = rowSet.getInt("id");
+                surname = rowSet.getString("surname");
             }
             
             if (name.length() > 0) {
-                user.User.id = id;
-                user.User.name = name;
+                User.id = id;
+                User.name = name;
+                User.surname = surname;
                 System.out.println("name burasi: " + name);
                 
                 return true;
@@ -121,14 +125,15 @@ public class Database {
         }
         try {
             ps = connection.prepareStatement("select VATANDAS.ID, cinsiyet, adres, dogum_yeri, dogum_tarihi"
-                    + " from VATANDAS, IKAMETGAH "
-                    + " where VATANDAS.ID=1235882");
+                    + " from VATANDAS INNER JOIN IKAMETGAH ON VATANDAS.ID = IKAMETGAH.ID "
+                    + " where VATANDAS.ID=?");
 
-//            ps.setInt(0, ID);
+            ps.setInt(1, ID);
 
             rowSet = new com.sun.rowset.CachedRowSetImpl();
             rowSet.populate(ps.executeQuery());
             return rowSet;
+            
 
         } finally {
             connection.close(); // return this connection to pool
@@ -163,8 +168,8 @@ public class Database {
         }
         try {
             ps = connection.prepareStatement("select VATANDAS.ID, ASKERLIK_YAPTI, ASKER_KACAGI"
-                    + " from VATANDAS, ASKERLIK "
-                    + " where id=?");
+                    + " from VATANDAS INNER JOIN ASKERLIK ON VATANDAS.ID = ASKERLIK.ID "
+                    + " where VATANDAS.id=?");
 
             ps.setInt(1, ID);
 
@@ -205,8 +210,8 @@ public class Database {
         }
         try {
             ps = connection.prepareStatement("select VATANDAS.ID, ceza_sebep, ceza_miktar, ceza_alinan_tarih"
-                    + " from VATANDAS, CEZA "
-                    + " where id=?");
+                    + " from VATANDAS INNER JOIN CEZA ON VATANDAS.ID = CEZA.ID "
+                    + " where VATANDAS.id=?");
 
             ps.setInt(1, ID);
 
@@ -247,8 +252,8 @@ public class Database {
         }
         try {
             ps = connection.prepareStatement("select VATANDAS.ID, emekli, calisiyor, emeklilik_baslangici "
-                    + " from VATANDAS, SIGORTA "
-                    + " where id=?");
+                    + " from VATANDAS INNER JOIN SIGORTA ON VATANDAS.ID = SIGORTA.ID "
+                    + " where VATANDAS.id=?");
 
             ps.setInt(1, ID);
 
@@ -289,8 +294,8 @@ public class Database {
         }
         try {
             ps = connection.prepareStatement("select VATANDAS.ID, adres, kisi_sayisi, tarih, metrekare"
-                    + " from VATANDAS, IKAMETGAH "
-                    + " where id=?");
+                    + " from VATANDAS INNER JOIN IKAMETGAH ON VATANDAS.ID = IKAMETGAH.ID "
+                    + " where VATANDAS.id=?");
 
             ps.setInt(1, ID);
 
@@ -332,7 +337,7 @@ public class Database {
         try {
             ps = connection.prepareStatement("select BASVURULAR.ID, KURUM_ID, BASVURU_DURUMU, BASVURU_TARIHI"
                     + " from BASVURULAR "
-                    + " where id=?");
+                    + " where BASVURULAR.id=?");
 
             ps.setInt(1, ID);
 

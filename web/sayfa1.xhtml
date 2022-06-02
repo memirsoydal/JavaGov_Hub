@@ -55,19 +55,31 @@ and open the template in the editor.
                     <h:form>
                         <div class="form-group">
                             <label>T.C. Kimlik Numarası</label>
-                            <h:inputText class="disabled" value="12345678910" />
+                            <h:inputText class="disabled" value="#{user.id}" />
                         </div>
                         <div class="form-group">
                             <label>İsim</label>
-                            <h:inputText class="disabled" value="Emir" />
+                            <h:inputText class="disabled" value="#{user.name}" />
                         </div>
                         <div class="form-group">
                             <label>Soyad</label>
-                            <h:inputText class="disabled" value="Matik" />
+                            <h:inputText class="disabled" value="#{user.surname}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Cinsiyet</label>
+                            <h:inputText class="disabled" value="#{services.gender}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Doğum Yeri</label>
+                            <h:inputText class="disabled" value="#{services.dogumYeri}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Doğum Tarihi</label>
+                            <h:inputText class="disabled" value="#{services.dogumTarihi}" />
                         </div>
                         <div class="form-group">
                             <label>Adres</label>
-                            <h:inputTextarea class="disabled" value="Adres/Adres Istanbul/Turkiye" />
+                            <h:inputTextarea class="disabled" value="#{services.address}" />
                         </div>
                     </h:form>
                 </div>

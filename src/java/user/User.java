@@ -1,5 +1,7 @@
 package user;
 
+
+
 /**
  *
  * @author emirm
@@ -27,7 +29,9 @@ public class User {
     public String getName() {
         return name;
     }
-    
+    public String getSurname(){
+        return surname;
+    }
     public int getId() {
         return id;
     }

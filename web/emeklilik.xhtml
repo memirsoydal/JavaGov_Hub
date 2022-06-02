@@ -17,7 +17,7 @@ and open the template in the editor.
         <nav class="nav">
             <div class="container">
                 <f:metadata>
-                    <f:event type="preRenderView" listener="#{services.getBasvuruValues}" />
+                    <f:event type="preRenderView" listener="#{services.getSigortaValues}" />
                 </f:metadata>
                 <div class="nav-inner">
                     <h:button class="logo-dash" outcome="#{dashboard.dashboard()}" />
@@ -36,7 +36,7 @@ and open the template in the editor.
         <div class="container">
             <div class="service">
                 <div class="service-header">
-                    <h1>Başvuru Yap</h1>
+                    <h1>Ne Zaman Emekli Olurum?</h1>
                     <div class="d-flex aic jcsb service-header-right">
                         <svg class="star-icon" width="25" height="23" viewBox="0 0 25 23" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73048 14.8942L5.32589 22.9182L12.6804 19.1298L20.035 22.9182L18.6304 14.8942L24.5804 9.21162L16.3577 8.04094L12.6804 0.740479L9.00317 8.04094L0.780518 9.21162L6.73048 14.8942ZM16.4371 14.196L17.324 19.2622L12.6804 16.8703L8.03692 19.2622L8.92375 14.196L5.16706 10.6081L10.3587 9.86895L12.6804 5.25958L15.0022 9.86895L20.1938 10.6081L16.4371 14.196Z" fill="#696969"/>
@@ -54,10 +54,6 @@ and open the template in the editor.
                 <div class="service-body">
                     <h:form>
                         <div class="form-group">
-                            <label>T.C. Kimlik Numarası</label>
-                            <h:inputText class="disabled" value="#{user.id}" />
-                        </div>
-                        <div class="form-group">
                             <label>İsim</label>
                             <h:inputText class="disabled" value="#{user.name}" />
                         </div>
@@ -66,25 +62,16 @@ and open the template in the editor.
                             <h:inputText class="disabled" value="#{user.surname}" />
                         </div>
                         <div class="form-group">
-                            <label>Doğum Yeri</label>
-                            <h:inputText class="disabled" value="#{services.dogumYeri}" />
+                            <label>Emekli</label>
+                            <h:inputText class="disabled" value="#{services.emekli}" />
                         </div>
                         <div class="form-group">
-                            <label>Doğum Tarihi</label>
-                            <h:inputText class="disabled" value="#{services.dogumTarihi}" />
+                            <label>Calisiyor</label>
+                            <h:inputText class="disabled" value="#{services.calisiyor}" />
                         </div>
                         <div class="form-group">
-                            <label>Adres</label>
-                            <h:inputTextarea class="disabled" value="#{services.address}" />
-                        </div>
-                        <div class="form-group">
-                            <label>Yardım Kuruluşları</label>
-                            <!--yardim kuruluslari buraya eklenecek-->
-                            <h:selectOneMenu value="">
-                                <f:selectItem itemValue="{}" itemLabel="Coffee3 - Cream Latte" />
-                                <f:selectItem itemValue="Extreme Mocha" itemLabel="Coffee3 - Extreme Mocha" />
-                               	<f:selectItem itemValue="Buena Vista" itemLabel="Coffee3 - Buena Vista" />
-                            </h:selectOneMenu>
+                            <label>Emeklilik Suresi</label>
+                            <h:inputText class="disabled" value="#{services.emeklilikBaslangici}" />
                         </div>
                     </h:form>
                 </div>

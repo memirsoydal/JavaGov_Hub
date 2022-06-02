@@ -17,7 +17,7 @@ and open the template in the editor.
         <nav class="nav">
             <div class="container">
                 <f:metadata>
-                    <f:event type="preRenderView" listener="#{services.getIkametgahValues}" />
+                    <f:event type="preRenderView" listener="#{services.getCezaValues}" />
                 </f:metadata>
                 <div class="nav-inner">
                     <h:button class="logo-dash" outcome="#{dashboard.dashboard()}" />
@@ -66,20 +66,16 @@ and open the template in the editor.
                             <h:inputText class="disabled" value="#{user.surname}" />
                         </div>
                         <div class="form-group">
-                            <label>Adres</label>
-                            <h:inputTextarea class="disabled" value="#{services.tapuluAdres}" />
+                            <label>Ceza Sebebi</label>
+                            <h:inputTextarea class="disabled" value="#{services.cezaSebep}" />
                         </div>
                         <div class="form-group">
-                            <label>Ikametgah Kisi Sayisi</label>
-                            <h:inputText class="disabled" value="#{services.ikametgahKisi}" />
+                            <label>Ceza Miktarı</label>
+                            <h:inputText class="disabled" value="#{services.cezaMiktar}" />
                         </div>
                         <div class="form-group">
-                            <label>Ikametgah Metrekare</label>
-                            <h:inputText class="disabled" value="#{services.ikametgahMetrekare}" />
-                        </div>
-                        <div class="form-group">
-                            <label>Ikametgah Tarihi</label>
-                            <h:inputText class="disabled" value="#{services.ikametgahTarih}" />
+                            <label>Ceza Tarihi</label>
+                            <h:inputText class="disabled" value="#{services.cezaTarih}" />
                         </div>
                     </h:form>
                 </div>

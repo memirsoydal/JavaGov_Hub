@@ -120,10 +120,17 @@ public class Services {
     }
     public void getCezaValues() throws SQLException{
         ResultSet myVariable = Database.cezaForm(user.User.id);
+        boolean cezaFound = false;
         while (myVariable.next()) {
+            cezaFound = true;
             this.CezaSebep = myVariable.getString("ceza_sebep");
             this.CezaMiktar = myVariable.getInt("ceza_miktar");
             this.CezaTarih = myVariable.getString("ceza_alinan_tarih");
+        }
+        if (!cezaFound){
+            this.CezaSebep = "YOKTUR";
+            this.CezaMiktar = 0;
+            this.CezaTarih = "YOKTUR";   
         }
     }
     public void getSigortaValues() throws SQLException{
@@ -150,6 +157,8 @@ public class Services {
             this.BASVURU_DURUMU = myVariable.getString("BASVURU_DURUMU");
             this.BASVURU_TARIHI = myVariable.getString("BASVURU_TARIHI");
         }
+        getApplyValues();
+        getKurumValues();
     }
     public void getKurumValues() throws SQLException{
         ResultSet myVariable = Database.kurumForm(this.KURUM_ID);

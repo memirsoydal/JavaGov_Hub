@@ -8,4 +8,4 @@ In short, our website is a one-stop solution for citizens to manage their govern
 
 ## Login/Signup Page
 
-![Login](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/17d48dd8-b11b-41af-b3d6-3e64ce77a4ba/Untitled.png)
+![login page](https://imgur.com/a/gpXurNZ)
